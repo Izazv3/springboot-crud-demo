@@ -1,37 +1,26 @@
-# springboot-crud-demo
+# Spring Boot PostgreSQL CRUD Demo
 
-Spring Boot CRUD demo is demonstrating how to implement simple CRUD operations with a `Product` entity.
+Java 21 + Spring Boot 3.5.6 + Spring Data JPA/Hibernate + PostgreSQL.
 
-## What's inside 
-This project is based on the [Spring Boot](http://projects.spring.io/spring-boot/) project and uses these packages :
-- Maven
-- Spring Core
-- Spring Data (Hibernate & MySQL)
-- Spring MVC (Tomcat)
-- [Thymleaf](https://thymeleaf.org)
+Architecture: Controller -> Service -> Repository -> Hibernate/JPA -> PostgreSQL
 
-![demo](https://cl.ly/sEGH/Screen%20Recording%202018-06-11%20at%2010.34%20AM.gif)
+## Run
+1. docker compose up -d
+2. mvn spring-boot:run
+3. Open http://localhost:8080/api/products
 
-## Installation 
-The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies
+Database: springboot_crud, user postgres, password postgres, port 5432.
 
-## Database configuration 
-Create a MySQL database with the name `springbootdb` and add the credentials to `/resources/application.properties`.  
-The default ones are :
+## CRUD
+POST /api/products
+GET /api/products
+GET /api/products/{id}
+PUT /api/products/{id}
+DELETE /api/products/{id}
 
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/springbootdb
-spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=update
-```
+POST/PUT JSON:
+{"productId":"P001","name":"Laptop","price":55000.00}
 
-## Usage 
-Run the project through the IDE and head out to [http://localhost:8080](http://localhost:8080)
+Create returns 201; delete returns 204; validation errors 400; duplicate product IDs 409; missing products 404.
 
-or 
-
-run this command in the command line:
-```
-mvn spring-boot:run
-```
+Override DB_URL, DB_USERNAME, DB_PASSWORD and PORT with environment variables.
